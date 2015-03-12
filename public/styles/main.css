@@ -385,4 +385,8 @@ body {
   .nav {
     margin-left: 132px;
   }
+  .headline {
+    left: 12%;
+    width: 80%;
+  }
 }
