@@ -98,7 +98,7 @@ var HUGE = {
 		if (window.innerWidth < 768) {
 			HUGE.removeOverlay(arguments[0], true);
 		}
-		// set location in navbar and reload page -- if this was not a hash URL, would not need to call reload
+		// set location in navbar and reload page to simulate navigation to hash url
 		window.location.href = this.children[0].href;
 		location.reload();
 	},
