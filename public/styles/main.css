@@ -1,18 +1,388 @@
 @import "fonts.css";
+/*
+  resets
+*/
 
-body {
-  background: #ec008c;
-  color: #fff;
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body, header, nav, ul, li, div {
+  padding: 0;
+  margin: 0;
 }
 
-h1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  margin: 0;
-  font: 20vmin/1 HUGEAvantGardeBold;
-  letter-spacing: -0.06em;
-  text-align: center;
+ul {
+  list-style-type: none;
+}
+
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/*
+  Styles
+*/
+
+body {
+  background: #fff;
+  overflow-x: hidden; /* for mobile menu push */
+}
+
+/*
+  Header section
+*/
+  header {
+    height: 60px;
+    background-color: #ec008c;
+    position: relative;
+    z-index: 16;
+  }
+
+  .logo i {
+    background-image: url('/images/HUGE-white.png');
+    background-repeat: no-repeat;
+    background-size: 50px 20px;
+    margin: 15px 10px;
+    width: 50px;
+    height: 20px;
+    left: -300px;
+    top: 5px;
+    position: absolute;
+    -webkit-transition: left 1s;
+    transition: left 1s;
+  }
+
+
+  .nav-open .logo i {
+    display: inline-block;
+    left: 15px;
+  }
+
+  .mobile-nav .hamburger {
+    width: 72px;
+    height: 72px;
+    background-size: 72px 72px;
+    cursor: pointer;
+    position: absolute;
+    top: -5px;
+  }
+
+  .mobile-nav .hamburger {
+    background-image: url('/images/toggle-open.svg');
+    left: 0;
+    -webkit-transition: left 1s;
+    transition: left 1s;
+  }
+
+
+  .nav-open .hamburger {
+    background-image: url('/images/toggle-close.svg');
+    left: calc(100% - 72px); /* using calc specifically for transition effect mentioned in design spec */
+  }
+
+  /*
+    Navigation menu
+  */
+  .nav {
+    background-color: #fff;
+    position: absolute;
+    top: 60px;
+    left: -300px;
+    height: 100%;
+    width: 300px;
+    -webkit-transition: left 1s;
+    transition: left 1s;
+    z-index: 16;
+    min-height: calc(100vh - 60px);
+    height: auto;
+  }
+
+  .nav .primary:first-of-type {
+    padding-top: 12px;
+  }
+
+  .nav .primary:last-of-type {
+    margin-bottom: 64px;
+  }
+
+  .nav-open .nav {
+    left: 0;
+  }
+
+  .nav-open #content {
+    left: 300px;
+  }
+
+  .nav a {
+    text-decoration: none;
+  }
+
+  .primary,
+  .secondary {
+    cursor: pointer;
+  }
+
+  .primary a,
+  .secondary a {
+    color: #000;
+    display: block;
+    padding: 0 24px;
+  }
+
+  .primary a {
+    font: 21px/48px HUGEAvantGardeBold;
+    height: 48px;
+  }
+
+  .secondary a {
+    font: 16px/48px Galaxie;
+    height: 0;
+    overflow: hidden;
+    -webkit-transition: height 1s;
+    transition: height 1s;
+  }
+
+  .primary.expandable.expanded .secondary a {
+    height: 48px;
+  }
+
+  .secondary:hover a {
+    color: #ec008c;
+  }
+
+  .primary:hover,
+  .secondary:hover {
+    background-color: #eee;
+  }
+
+  .primary.expandable.expanded:hover {
+    background-color: #fff;
+  }
+
+  .primary.expandable {
+    position: relative;
+  }
+
+  .primary.expandable > a::after {
+    display: inline-block;
+    border-top: solid 6px #ec008c;
+    border-right: solid 6px #ec008c;
+    border-bottom: none;
+    border-left: none;
+    width: 16px;
+    height: 16px;
+    content: '';
+    transform: rotate(135deg);
+    position: absolute;
+    right: 25px;
+    top: 6px;
+    -webkit-transition: transform 1s;
+    transition: transform 1s;
+  }
+
+  .primary.expandable.expanded > a:after {
+    transform: rotate(-45deg);
+    top: 16px;
+  }
+
+  .copyright {
+    display: none;
+  }
+
+  .nav-open .copyright {
+    display: block;
+    font: 12px/16px 'Helvetica Neue Regular';
+    position: absolute;
+    left: 24px;
+    bottom: 0;
+    height: 48px;
+  }
+
+/*
+  Content area
+*/
+
+  #content {
+    position: relative;
+    left: 0;
+    top: 0;
+    -webkit-transition: left 1s;
+    transition: left 1s;
+  }
+
+  .overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 15;
+  }
+
+  .hero-container {
+    position: relative;
+  }
+
+
+  .hero {
+    background-image: url('/images/background-image.jpg');
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 240px;
+  }
+
+  .headline {
+    font: 44px/48px HUGEAvantGardeBold;
+    margin: 0;
+    letter-spacing: -0.06em;
+    text-align: left;
+    color: #000;
+    margin: 50px 24px;
+  }
+
+  .article {
+    font: 14px/24px Galaxie;
+    margin: 50px 24px;
+  }
+
+/*
+  Desktop styles  
+*/
+
+
+@media screen and (min-width: 768px) {
+  header {
+    height: 72px;
+    float: left;
+    width: 100%;
+  }
+
+  .mobile-nav {
+    display: none;
+  }
+
+  .logo i {
+    display: block;
+    background-size: 60px 24px;
+    width: 60px;
+    height: 24px;
+    top: 11px;
+    left: 14px;
+  }
+
+  .nav {
+    display: inline-table;
+    background-color: inherit;
+    position: relative;
+    float: left;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin-left: 100px;
+  }
+
+
+  .nav .primary:first-of-type {
+    padding-top: 0;
+  }
+
+
+  .primary {
+    float: left;
+  }
+  
+  .primary a {
+    padding: 0 12px;
+  }
+
+  .primary > a {
+    height: 72px;
+  }
+  
+  .primary > ul {
+    width: 170%;
+    position: absolute;
+  }
+
+  .primary.expandable.expanded .secondary:first-of-type {
+    padding-top: 12px;
+  }
+
+  .primary,
+  .primary:hover {
+    background-color: inherit;
+  }
+
+  .primary:active,
+  .primary:hover,
+  .primary.open,
+  .secondary,
+  .primary.expandable.expanded {
+    background-color: #fff;
+  }
+
+  .primary > a {
+    color: #fff;
+    padding-top: 15px;
+  }
+
+
+  .primary:active > a,
+  .primary:hover > a,
+  .primary.open > a,
+  .primary.expandable.expanded > a {
+    color: #ec008c;
+  }
+
+  .primary.expandable > a::after {
+    display: none;
+  }
+
+
+  .hero {
+    height: 640px;
+  }
+
+  .headline {
+    position: absolute;
+    top: 32%;
+    left: 5%;
+    width: 90%;
+    font-size: 120px;
+    line-height: 132px;
+    color: #fff;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .article {
+    max-width: 968px;
+    font-size: 24px;
+    line-height: 36px;
+    margin-top: 60px;
+    margin-left: 132px;
+    margin-right: 132px;
+  }
+}
+
+/*
+  Media queries for fluidity of nav bar
+*/
+
+
+@media screen and (min-width: 960px) {
+  .primary a {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media screen and (min-width: 1070px) {
+  .nav {
+    margin-left: 132px;
+  }
 }
